@@ -1,0 +1,41 @@
+<!-- The list of messages will appear here: -->
+<div class="form-row  mb-5">
+    <div class="col-md-12">
+        <h1 class="mt-5 display-1 text-dark">Slacker</h1>
+        <h4 class="display-4 text-warning mt-3">Simple chat app built in Elixir and Phoenix</h4>
+    </div>
+    <div class="w-100 bg-light">
+        <div class="form-row p-3">
+            <div class="col-md-3">
+                <select id='name' class="form-control" style="font-size: 1.6em" data-bind="options: users, value: nameInput" style="height: 40px"></select>
+            </div>
+            <div class="col-md-9">
+                <input type="text" id="msg" style="font-size: 1.6em" class="form-control bg-white" placeholder="Type Message and press enter">
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" row p-3 ">
+    <div class="chat col-md-12 bg-light pt-3">
+        <div data-bind="foreach: messages">
+            <div class="card p-3 mb-3 col-md-8  rounded" data-bind="css: name=='User 1' ? 'usr1msg' : 'usr2msg' , hasFocus: true ">
+                <div data-bind="text: message" style="font-size: 1.5em ">
+                </div>
+                <small><b data-bind="text: name"></b>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript ">
+    var messages = ko.observableArray([]);
+    var limiter = ko.computed(function() {
+        return messages.slice(0, 25);
+    });
+    var nameInput = ko.observable();
+    var msgInput = ko.observable();
+    var users = ko.observableArray(['User 1', 'User 2']);
+    ko.applyBindings();
+</script>
